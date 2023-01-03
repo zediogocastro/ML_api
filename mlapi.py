@@ -18,5 +18,6 @@ with open('rfmodel.pkl', 'rb') as f:
 @app.post('/')
 async def scoring_endpoint(item:ScoringItem):
     df = pd.DataFrame([item.dict().values()], columns=item.dict().keys())
+    print(df.head())
     yhat = model.predict(df)
     return {"prediction": int(yhat)}
